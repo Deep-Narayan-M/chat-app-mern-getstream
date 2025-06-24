@@ -106,7 +106,4 @@ In the root directory:
 npm run dev
 ```
 
-## 👨‍💻 Author
-Deep Narayan Mistry
-
 ---
