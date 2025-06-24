@@ -2,8 +2,6 @@
 
 A modern, real-time chat application built with React and Node.js that enables seamless communication between users. Featuring a beautiful UI, video calling capabilities, and a robust friend system.
 
-![Xeno Chat Logo](chat-frontend/public/xeno.svg)
-
 ## ✨ Features
 
 - **🔐 Secure Authentication**
