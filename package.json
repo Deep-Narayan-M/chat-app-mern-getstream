@@ -1,0 +1,13 @@
+{
+  "name": "xeno-chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix chat-backend && npm install --prefix chat-frontend && npm run build --prefix chat-frontend",
+    "start": "npm run start --prefix chat-backend",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Deep Narayan Mistry",
+  "license": "ISC"
+}
