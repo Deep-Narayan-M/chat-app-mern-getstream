@@ -106,20 +106,7 @@ In the root directory:
 npm run dev
 ```
 
-## 📱 Screenshots
-
-[Your screenshots will go here]
-
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to open issues and submit pull requests.
-
-## 📄 License
-
-This project is licensed under the ISC License.
-
 ## 👨‍💻 Author
-
 Deep Narayan Mistry
 
 ---
