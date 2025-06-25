@@ -35,6 +35,21 @@ const CallPage = () => {
     enabled: !!authUser,
   });
 
+  // Clean up resources when component unmounts
+  useEffect(() => {
+    return () => {
+      if (call) {
+        // Leave the call when component unmounts
+        call.leave().catch(console.error);
+      }
+
+      if (client) {
+        // Disconnect the client when component unmounts
+        client.disconnectUser().catch(console.error);
+      }
+    };
+  }, [client, call]);
+
   useEffect(() => {
     const initCall = async () => {
       if (!tokenData?.chatToken || !authUser || !callId) return;
@@ -46,11 +61,12 @@ const CallPage = () => {
           image: authUser.profilePic,
         };
 
+        // Create a new video client instance
+        // The SDK will handle duplicate instances internally
         const videoClient = new StreamVideoClient({
           apiKey: STREAM_API_KEY,
           user,
-          token: tokenData.chatToken,
-          video: { timeout: 10000 },
+          token: tokenData?.chatToken,
         });
 
         const callInstance = videoClient.call("default", callId);
@@ -76,7 +92,7 @@ const CallPage = () => {
 
   return (
     <div className="h-screen flex flex-col items-center justify-center">
-      <div className="relative">
+      <div className="relative w-full h-full">
         {client && call ? (
           <StreamVideo client={client}>
             <StreamCall call={call}>

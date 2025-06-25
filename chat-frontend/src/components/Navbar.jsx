@@ -3,17 +3,18 @@ import useAuthUser from "../hooks/useAuthUser";
 import { BellIcon, LogOutIcon, Sparkle } from "lucide-react";
 import ThemeSelector from "./ThemeSelector";
 import useLogout from "../hooks/useLogout";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { authUser } = useAuthUser();
-  // const navigate = useNavigate();
-  // const queryClient = useQueryClient();
-  // const { mutate: logoutMutation } = useMutation({
-  //   mutationFn: logout,
-  //   onSuccess: () => queryClient.invalidateQueries({ queryKey: ["authUser"] }),
-  // });
-
   const { logoutMutation } = useLogout();
+
+  const handleLogout = () => {
+    logoutMutation();
+    toast.success("Logged out successfully");
+    // Force redirect to login page
+    window.location.href = "/login";
+  };
 
   return (
     <nav className="bg-base-200 border-b border-base-300 sticky top-0 z-30 h-16 flex items-center">
@@ -51,7 +52,7 @@ const Navbar = () => {
           </Link>
 
           {/* Logout button */}
-          <button className="btn btn-ghost btn-circle" onClick={logoutMutation}>
+          <button className="btn btn-ghost btn-circle" onClick={handleLogout}>
             <LogOutIcon className="size-6 text-base-content opacity-70" />
           </button>
         </div>

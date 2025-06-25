@@ -20,7 +20,7 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.3",
-    "stream-chat": "^8.14.4",
+    "stream-chat": "^8.60.0",
     "xeno-chat": "file:.."
   },
   "devDependencies": {

@@ -86,7 +86,7 @@ const App = () => {
           element={
             isAuthenticated && isOnboarded ? (
               <Layout>
-                <ChatPage />
+                <ChatPage theme={theme} />
               </Layout>
             ) : (
               <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />

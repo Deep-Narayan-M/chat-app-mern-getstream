@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import useAuthUser from "../hooks/useAuthUser";
 import { useQuery } from "@tanstack/react-query";
 import { getStreamToken } from "../lib/api";
+import { useThemeStore } from "../store/useThemeStore";
 
 import {
   Channel,
@@ -23,7 +24,7 @@ const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY;
 
 const ChatPage = () => {
   const { id: targetUserId } = useParams();
-
+  const { theme } = useThemeStore();
   const [chatClient, setChatClient] = useState(null);
   const [channel, setChannel] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -47,7 +48,7 @@ const ChatPage = () => {
           {
             id: authUser._id,
             name: authUser.username,
-            image: authUser.profilePic,
+            image: authUser.profilePic || null,
           },
           tokenData.chatToken
         );
@@ -75,6 +76,13 @@ const ChatPage = () => {
     };
 
     initChat();
+
+    // Cleanup function
+    return () => {
+      if (chatClient) {
+        chatClient.disconnectUser();
+      }
+    };
   }, [tokenData, authUser, targetUserId]);
 
   const handleVideoCall = () => {
@@ -91,9 +99,24 @@ const ChatPage = () => {
 
   if (loading || !chatClient || !channel) return <ChatLoader />;
 
+  // Map the app theme to Stream Chat theme
+  const streamTheme =
+    theme === "night" ||
+    theme === "dark" ||
+    theme === "forest" ||
+    theme === "halloween" ||
+    theme === "black" ||
+    theme === "luxury" ||
+    theme === "dracula" ||
+    theme === "business" ||
+    theme === "coffee" ||
+    theme === "sunset"
+      ? "str-chat__theme-dark"
+      : "str-chat__theme-light";
+
   return (
     <div className="h-[calc(100vh-4rem)]">
-      <Chat client={chatClient}>
+      <Chat client={chatClient} theme={streamTheme}>
         <Channel channel={channel}>
           <div className="w-full relative">
             <CallButton handleVideoCall={handleVideoCall} />
