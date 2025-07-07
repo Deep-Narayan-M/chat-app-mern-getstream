@@ -68,7 +68,7 @@ A modern, real-time chat application built with React and Node.js that enables s
 1. **Clone the repository**
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Deep-Narayan-M/chat-app-mern-getstream.git
 cd xeno-chat
 ```
 
